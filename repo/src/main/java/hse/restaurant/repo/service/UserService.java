@@ -29,8 +29,12 @@ public class UserService {
         if (user.getName() == null || user.getName().isEmpty()) {
             throw new IllegalArgumentException("Name cannot be empty");
         }
+        // Проверяем корректность email
+        if (user.getEmail() == null || user.getName().isEmpty()) {
+            throw new IllegalArgumentException("Email cannot be empty");
+        }
         // Проверяем корректность статуса
-        if (user.getStatus() == null) {
+        if (user.getStatus() == null ) {
             throw new IllegalArgumentException("Status cannot be empty");
         }
         // Проверяем, что пользователь с таким email не существует
