@@ -68,6 +68,9 @@ public class OrderService {
         orderRepository.save(order);
     }
     public String addDish(Dish dish, Order order, String email) {
+        if (!accessControlService.hasAccessGuest(userRepository.findByEmail(email))) {
+            throw new IllegalStateException("User must be logged as Guest");
+        }
         if (order == null) {
             throw new IllegalArgumentException("Impossible to update non-existing order");
         }
@@ -97,6 +100,9 @@ public class OrderService {
     }
 
     public String getOrderStatus(UUID orderId, String email) {
+        if (!accessControlService.hasAccessGuest(userRepository.findByEmail(email))) {
+            throw new IllegalStateException("User must be logged as Guest");
+        }
         // Проверяем, что заказ существует
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new IllegalArgumentException("Order with ID " + orderId + " does not exist"));
@@ -108,6 +114,9 @@ public class OrderService {
     }
 
     public String payCookedOrder(Order order, String email) {
+        if (!accessControlService.hasAccessGuest(userRepository.findByEmail(email))) {
+            throw new IllegalStateException("User must be logged as Guest");
+        }
         if (order == null) {
             throw new IllegalArgumentException("Unable to pay for non-existent order");
         }
@@ -128,6 +137,9 @@ public class OrderService {
     }
 
     public List<Order> getByUserId(String email) {
+        if (!accessControlService.hasAccessGuest(userRepository.findByEmail(email))) {
+            throw new IllegalStateException("User must be logged as Guest");
+        }
         return orderRepository.findByClientEmail(email);
     }
 

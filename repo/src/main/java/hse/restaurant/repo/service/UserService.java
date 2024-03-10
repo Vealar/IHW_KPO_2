@@ -56,6 +56,8 @@ public class UserService {
             throw new RuntimeException("User with email " + user.getEmail() + " is already logged in");
         }
         user.setStatus(ConnectionStatus.ONLINE);
+        user.setId(existingUser.getId());
+        userRepository.save(user);
         return user;
     }
 
@@ -68,6 +70,8 @@ public class UserService {
             throw new RuntimeException("User with email " + user.getEmail() + " is already logged out");
         }
         user.setStatus(ConnectionStatus.OFFLINE);
+        user.setId(existingUser.getId());
+        userRepository.save(user);
         return user;
     }
 

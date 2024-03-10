@@ -80,7 +80,11 @@ public class GuestControllerImpl implements GuestController {
 
         @GetMapping("/user")
         public ResponseEntity<List<Order>> getOrdersByUserId(@RequestParam String email) {
-                List<Order> orders = orderService.getByUserId(email);
-                return ResponseEntity.ok(orders);
+                try {
+                        List<Order> orders = orderService.getByUserId(email);
+                        return ResponseEntity.ok(orders);
+                } catch (IllegalStateException e) {
+                        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null); // или любой другой HTTP-код состояния
+                }
         }
 }

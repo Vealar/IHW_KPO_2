@@ -11,18 +11,18 @@ import java.util.UUID;
 public interface AdminController {
 
     @PostMapping("/add")
-    ResponseEntity<Dish> addDish(@RequestBody Dish dish,@RequestParam String email);
+    ResponseEntity<?> addDish(@RequestBody Dish dish,@RequestParam String email);
 
     @DeleteMapping("/remove")
-    ResponseEntity<Void> removeDish(@RequestParam UUID id,@RequestParam String email);
+    ResponseEntity<?> removeDish(@RequestParam UUID id,@RequestParam String email);
 
     @PutMapping("/update")
-    ResponseEntity<Dish> updateDish(@RequestBody Dish updatedDish, @RequestParam UUID id,@RequestParam String email);
+    ResponseEntity<?> updateDish(@RequestBody Dish updatedDish, @RequestParam UUID id,@RequestParam String email);
 
     @GetMapping("/{id}")
-    ResponseEntity<Dish> getDishById(@PathVariable UUID id,@RequestParam String email);
+    ResponseEntity<?> getDishById(@PathVariable UUID id,@RequestParam String email);
 
     @GetMapping("/all")
-    ResponseEntity<List<Dish>> getAllDishes(@RequestParam String email);
+    ResponseEntity<?> getAllDishes(@RequestParam String email);
 }
 
